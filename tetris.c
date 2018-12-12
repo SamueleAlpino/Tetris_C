@@ -37,7 +37,7 @@ void tetramino_spawn(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map, int x_0, int
 void tetramino_random_spawn(tetramino_t tetramino[4], tetris_map_t *tetris_map)
 {
     //  int random = 1 + (6 * rand() / (RAND_MAX + 1));
-    int random = 0 + (6 * rand() / (RAND_MAX + 1));
+    int random = 0 + (7 * rand() / (RAND_MAX + 1));
     printf("%d \n", random);
     switch (random)
     {
