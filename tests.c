@@ -145,23 +145,6 @@ TEST(test_spawn)
 
 	ASSERT_THAT(tetramino_group[1].is_center == 1);
 }
-// Why is this test passing?
-TEST(check_row_filled_2x2)
-{
-	TETRAMINO_SETUP(2, 2);
-	tetramino_move_left(&tetramino, &tetris_map);
-	tetramino_move_down(&tetramino, &tetris_map);
-	tetramino_move_down(&tetramino, &tetris_map);
-
-	tetramino_t tetramino2;
-	tetramino_init(&tetramino2, &tetris_map);
-	tetramino_move_right(&tetramino2, &tetris_map);
-	tetramino_move_down(&tetramino2, &tetris_map);
-	tetramino_move_down(&tetramino2, &tetris_map);
-
-	ASSERT_THAT(tetris_map.cell[2] == 0);
-	ASSERT_THAT(tetris_map.cell[3] == 0);
-}
 
 TEST(tetramino_map_init)
 {
