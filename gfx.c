@@ -2,7 +2,7 @@
 
 static void _draw_rect_internal(SDL_Renderer *renderer, SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b)
 {
-    SDL_SetRenderDrawColor(renderer, r, g, b, 255);
+    SDL_SetRenderDrawColor(renderer, r, g, b, 0);
     SDL_RenderDrawRect(renderer, rect);
 }
 

@@ -1,11 +1,10 @@
 #define SDL_MAIN_HANDLED
 #include "tetris.h"
 
-
 int main(int argc, char **argv)
 {
 	int ret = 0;
-	
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 	{
 		SDL_Log("unable to initialize SDL2: %s", SDL_GetError());
@@ -32,7 +31,9 @@ int main(int argc, char **argv)
 	tetris_map_init(&map, 10, 20);
 
 	tetramino_t tetramino_group[TETRAMINOBODY];
-	tetramino_random_spawn(tetramino_group, &map);
+	tetramino_spawn(tetramino_group, &map, -1, -2, 0, 1, 1, 1, 1, 1, 1, "L");
+
+	//	tetramino_random_spawn(tetramino_group, &map);
 
 	int timer = 1000;
 	Uint32 last_ticks = SDL_GetTicks();
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
 				}
 
 				tetramino_random_spawn(tetramino_group, &map);
-			//	tetramino_s_init(tetramino_group, &map);
+				//	tetramino_s_init(tetramino_group, &map);
 				//tetramino_cube_init(tetramino_group, &map);
 			}
 			timer = 1000;

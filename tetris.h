@@ -49,14 +49,11 @@ void tetris_delete_fill_row(tetris_map_t *tetris_map, int row);
 
 void tetramino_rotate(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map );
 void tetramino_cube_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
-void tetramino_l_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
-void tetramino_j_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
-void tetramino_s_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
-void tetramino_z_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
-void tetramino_t_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
 
 void tetramino_random_spawn(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
+//string now only for debug , is useless , remove
+void tetramino_spawn(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map, int x_0, int x_1, int x_2, int x_3,int y_0,int y_1,int y_2,int y_3,int index_center, const char* tetramino_name);
+void tetramino_rot(TETRAMINO_REF, tetris_map_t *tetris_map);
 
 int tetramini_to_map(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map);
 int tetramino_check_rot(TETRAMINO_REF,tetris_map_t *tetris_map, int x, int y);
-void tetramino_rot(TETRAMINO_REF, tetris_map_t *tetris_map);

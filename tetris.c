@@ -6,155 +6,61 @@ void tetramino_init(TETRAMINO_REF, tetris_map_t *tetris_map)
     tetramino->y = -1;
 }
 
-void tetramino_cube_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
+void tetramino_spawn(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map, int x_0, int x_1, int x_2, int x_3, int y_0, int y_1, int y_2, int y_3, int index_center, const char *tetramino_name)
 {
     int half_screen = tetris_map->width / 2;
 
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 0;
-    tetramini[0].is_center = 0;
+    tetramini[0].x = half_screen + x_0;
+    tetramini[0].y = y_0;
 
-    tetramini[1].x = half_screen;
-    tetramini[1].y = 0;
-    tetramini[1].is_center = 0;
+    tetramini[1].x = half_screen + x_1;
+    tetramini[1].y = y_1;
 
-    tetramini[2].x = half_screen - 1;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 0;
+    tetramini[2].x = half_screen + x_2;
+    tetramini[2].y = y_2;
 
-    tetramini[3].x = half_screen;
-    tetramini[3].y = 1;
-    tetramini[3].is_center = 0;
-}
+    tetramini[3].x = half_screen + x_3;
+    tetramini[3].y = y_3;
 
-void tetramino_s_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
-{
-    int half_screen = tetris_map->width / 2;
+    int i;
 
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 0;
-    tetramini[0].is_center = 0;
+    if (index_center != -1)
+        tetramini[index_center].is_center = 1;
 
-    tetramini[1].x = half_screen;
-    tetramini[1].y = 0;
-    tetramini[1].is_center = 0;
-
-    tetramini[2].x = half_screen - 1;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 1;
-
-    tetramini[3].x = half_screen - 2;
-    tetramini[3].y = 1;
-    tetramini[3].is_center = 0;
-}
-
-void tetramino_z_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
-{
-    int half_screen = tetris_map->width / 2;
-
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 0;
-    tetramini[0].is_center = 1;
-
-    tetramini[1].x = half_screen - 2;
-    tetramini[1].y = 0;
-    tetramini[1].is_center = 0;
-
-    tetramini[2].x = half_screen - 1;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 0;
-
-    tetramini[3].x = half_screen;
-    tetramini[3].y = 1;
-    tetramini[3].is_center = 0;
-}
-
-void tetramino_l_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
-{
-    int half_screen = tetris_map->width / 2;
-
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 1;
-    tetramini[0].is_center = 1;
-
-    tetramini[1].x = half_screen - 2;
-    tetramini[1].y = 1;
-    tetramini[1].is_center = 0;
-
-    tetramini[2].x = half_screen;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 0;
-
-    tetramini[3].x = half_screen;
-    tetramini[3].y = 0;
-    tetramini[3].is_center = 0;
-}
-
-void tetramino_j_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
-{
-    int half_screen = tetris_map->width / 2;
-
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 1;
-    tetramini[0].is_center = 1;
-
-    tetramini[1].x = half_screen - 2;
-    tetramini[1].y = 1;
-    tetramini[1].is_center = 0;
-
-    tetramini[2].x = half_screen;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 0;
-
-    tetramini[3].x = half_screen - 2;
-    tetramini[3].y = 0;
-    tetramini[3].is_center = 0;
-}
-
-void tetramino_t_init(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
-{
-    int half_screen = tetris_map->width / 2;
-
-    tetramini[0].x = half_screen - 1;
-    tetramini[0].y = 1;
-    tetramini[0].is_center = 1;
-
-    tetramini[1].x = half_screen - 2;
-    tetramini[1].y = 1;
-    tetramini[1].is_center = 0;
-
-    tetramini[2].x = half_screen;
-    tetramini[2].y = 1;
-    tetramini[2].is_center = 0;
-
-    tetramini[3].x = half_screen - 1;
-    tetramini[3].y = 0;
-    tetramini[3].is_center = 0;
+    for (i = 0; i < TETRAMINOBODY; i++)
+    {
+        if (i != index_center)
+            tetramini[i].is_center = 0;
+    }
 }
 
 void tetramino_random_spawn(tetramino_t tetramino[4], tetris_map_t *tetris_map)
 {
-    int random = 1 + (6 * rand() / (RAND_MAX + 1));
+    //  int random = 1 + (6 * rand() / (RAND_MAX + 1));
+    int random = 0 + (6 * rand() / (RAND_MAX + 1));
     printf("%d \n", random);
     switch (random)
     {
     case 0:
-        tetramino_cube_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, 0, -1, 0, 0, 0, 1, 1, -1, "Cube");
         break;
     case 1:
-        tetramino_j_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, -2, 0, -2, 1, 1, 1, 0, 0, "J");
         break;
     case 2:
-        tetramino_s_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, 0, -1, -2, 0, 0, 1, 1, 2, "S");
         break;
     case 3:
-        tetramino_z_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, -2, -1, 0, 0, 0, 1, 1, 0, "Z");
         break;
     case 4:
-        tetramino_l_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, -2, 0, 0, 1, 1, 1, 0, 0, "L");
         break;
     case 5:
-        tetramino_t_init(tetramino, tetris_map);
+        tetramino_spawn(tetramino, tetris_map, -1, -2, 0, -1, 1, 1, 1, 0, 0, "T");
+        break;
+    case 6:
+        tetramino_spawn(tetramino, tetris_map, -1, -2, 0, 1, 1, 1, 1, 1, 1, "L");
         break;
     }
 }
@@ -340,81 +246,96 @@ void tetramino_rot(TETRAMINO_GROUP_REF, tetris_map_t *tetris_map)
             current_center = i;
     }
 
-    printf("index center : %d\n", current_center);
-
     if (tetramini[current_center].is_center == 1)
     {
         for (i = 0; i < TETRAMINOBODY; i++)
         {
             if (tetramini[i].is_center == 0)
             {
-
-                // printf("x : %d    ", tetramini[current_center].x);
-                // printf("x' : %d    ", tetramini[i].x);
                 int x = SDL_abs(tetramini[current_center].x - tetramini[i].x);
-                // printf("final X : %d\n", x);
-
-                // printf("y : %d    ", tetramini[current_center].y);
-                // printf("y' : %d    ", tetramini[i].y);
                 int y = SDL_abs(tetramini[current_center].y - tetramini[i].y);
-                // printf("final Y : %d\n", y);
 
                 int n = x + y;
-                if (n == 1)
+
+                if (tetramini[current_center].x < tetramini[i].x &&
+                    tetramini[current_center].y > tetramini[i].y && n == 2)
                 {
-                    if (tetramini[current_center].x < tetramini[i].x &&
-                        tetramini[current_center].y == tetramini[i].y)
+                    if (tetramino_check_rot(&tetramini[i], tetris_map, 0, n) == 0)
                     {
-                        tetramini[i].x -= n;
                         tetramini[i].y += n;
                     }
-                    else if (tetramini[current_center].x == tetramini[i].x &
-                             tetramini[current_center].y < tetramini[i].y)
+                }
+                else if (tetramini[current_center].x < tetramini[i].x &
+                             tetramini[current_center].y < tetramini[i].y &&
+                         n == 2)
+                {
+                    if (tetramino_check_rot(&tetramini[i], tetris_map, -n, 0) == 0)
                     {
                         tetramini[i].x -= n;
+                    }
+                }
+                else if (tetramini[current_center].x > tetramini[i].x &
+                             tetramini[current_center].y < tetramini[i].y &&
+                         n == 2)
+                {
+                    if (tetramino_check_rot(&tetramini[i], tetris_map, 0, -n) == 0)
+                    {
                         tetramini[i].y -= n;
                     }
-                    else if (tetramini[current_center].x > tetramini[i].x &
-                             tetramini[current_center].y == tetramini[i].y)
+                }
+                else if (tetramini[current_center].x > tetramini[i].x &
+                             tetramini[current_center].y > tetramini[i].y &&
+                         n == 2)
+                {
+                    if (tetramino_check_rot(&tetramini[i], tetris_map, n, 0) == 0)
                     {
                         tetramini[i].x += n;
-                        tetramini[i].y -= n;
-                    }
-                    else if (tetramini[current_center].x == tetramini[i].x &
-                             tetramini[current_center].y > tetramini[i].y)
-                    {
-                        tetramini[i].x += n;
-                        tetramini[i].y += n;
                     }
                 }
                 else
                 {
                     if (tetramini[current_center].x < tetramini[i].x &&
-                        tetramini[current_center].y > tetramini[i].y)
+                        tetramini[current_center].y == tetramini[i].y)
                     {
-                        tetramini[i].y += n;
+                        if (tetramino_check_rot(&tetramini[i], tetris_map, -n, n) == 0)
+                        {
+                            tetramini[i].x -= n;
+                            tetramini[i].y += n;
+                        }
                     }
-                    else if (tetramini[current_center].x < tetramini[i].x &
+                    else if (tetramini[current_center].x == tetramini[i].x &
                              tetramini[current_center].y < tetramini[i].y)
                     {
-                        tetramini[i].x -= n;
+                        if (tetramino_check_rot(&tetramini[i], tetris_map, -n, -n) == 0)
+                        {
+                            tetramini[i].x -= n;
+                            tetramini[i].y -= n;
+                        }
                     }
                     else if (tetramini[current_center].x > tetramini[i].x &
-                             tetramini[current_center].y < tetramini[i].y)
+                             tetramini[current_center].y == tetramini[i].y)
                     {
-                        tetramini[i].y -= n;
+                        if (tetramino_check_rot(&tetramini[i], tetris_map, n, -n) == 0)
+                        {
+                            tetramini[i].x += n;
+                            tetramini[i].y -= n;
+                        }
                     }
-                    else if (tetramini[current_center].x > tetramini[i].x &
+                    else if (tetramini[current_center].x == tetramini[i].x &
                              tetramini[current_center].y > tetramini[i].y)
                     {
-                        tetramini[i].x += n;
+                        if (tetramino_check_rot(&tetramini[i], tetris_map, n, n) == 0)
+                        {
+                            tetramini[i].x += n;
+                            tetramini[i].y += n;
+                        }
                     }
                 }
             }
         }
     }
 }
-
+//Fix index
 int tetramino_check_rot(TETRAMINO_REF, tetris_map_t *tetris_map, int x, int y)
 {
     int temp_x = tetramino->x + x;
