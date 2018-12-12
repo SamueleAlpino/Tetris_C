@@ -26,7 +26,7 @@ TEST(tetramino_move_right_blocked)
 {
 	TETRAMINO_SETUP(1, 1);
 	tetramino_move_right(&tetramino, &tetris_map);
-
+	
 	ASSERT_THAT(tetramino.x == 0);
 }
 
@@ -126,15 +126,25 @@ TEST(tetramino_dead)
 	ASSERT_THAT(tetramino_move_down(&tetramino, &tetris_map) == TETRAMINO_DEAD);
 }
 
-// Why is this test passing?
-TEST(check_row_filled_1x1)
+TEST(test_spawn)
 {
-	TETRAMINO_SETUP(1, 1);
-	tetramino_move_down(&tetramino, &tetris_map);
+	tetris_map_t map;
+	tetris_map_init(&map, 10, 20);
 
-	ASSERT_THAT(tetris_map.cell[0] == 0);
+	tetramino_t tetramino_group[TETRAMINOBODY];
+	tetramino_spawn(tetramino_group, &map, -1, -2, 0, 1, 1, 1, 1, 1, 1, "L");
+	ASSERT_THAT(tetramino_group[0].x == map.width/2  - 1);
+	ASSERT_THAT(tetramino_group[1].x == map.width/2  - 2);
+	ASSERT_THAT(tetramino_group[2].x == map.width/2);
+	ASSERT_THAT(tetramino_group[3].x == map.width/2 + 1);
+
+	ASSERT_THAT(tetramino_group[0].y == 1);
+	ASSERT_THAT(tetramino_group[1].y == 1);
+	ASSERT_THAT(tetramino_group[2].y == 1);
+	ASSERT_THAT(tetramino_group[3].y == 1);
+
+	ASSERT_THAT(tetramino_group[1].is_center == 1);
 }
-
 // Why is this test passing?
 TEST(check_row_filled_2x2)
 {
@@ -162,21 +172,9 @@ TEST(tetramino_map_init)
 }
 int main(int argc, char **argv)
 {
-	RUN_TEST(tetramino_init);
-	RUN_TEST(tetramino_move_down);
-	RUN_TEST(tetramino_move_down_wrong_value);
 	RUN_TEST(tetramino_map_init);
-	RUN_TEST(tetramino_busy_cell);
-	RUN_TEST(tetramino_fill_two_blocks);
-	RUN_TEST(tetramino_dead);
-	RUN_TEST(tetramino_move_right);
-	RUN_TEST(tetramino_move_right_blocked);
-	RUN_TEST(tetramino_move_right_multiple);
-	RUN_TEST(tetramino_move_left_blocked);
-	RUN_TEST(tetramino_move_left);
-	RUN_TEST(tetramino_move_left_multiple);
-	RUN_TEST(check_row_filled_1x1);
-	RUN_TEST(check_row_filled_2x2);
+	RUN_TEST(test_spawn);
+
 	PRINT_TEST_RESULTS();
 	return 0;
 }
